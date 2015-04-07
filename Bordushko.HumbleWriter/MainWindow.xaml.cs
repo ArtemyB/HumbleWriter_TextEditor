@@ -37,7 +37,7 @@ namespace Bordushko.HumbleWriter
             if (dialog.ShowDialog() == true)
 	        {
                 FileStream fStream = new FileStream(dialog.FileName, FileMode.Open);
-                TextRange range = new TextRange(mainRichTextBox.Document.ContentStart, mainRichTextBox.Document.ContentEnd);
+                TextRange range = new TextRange(mainTextArea.Document.ContentStart, mainTextArea.Document.ContentEnd);
                 range.Load(fStream, DataFormats.Rtf);
                 fStream.Close();
 	        }
@@ -51,7 +51,7 @@ namespace Bordushko.HumbleWriter
             if (dialog.ShowDialog() == true)
             {
                 FileStream fStream = new FileStream(dialog.FileName, FileMode.CreateNew);
-                TextRange range = new TextRange(mainRichTextBox.Document.ContentStart, mainRichTextBox.Document.ContentEnd);
+                TextRange range = new TextRange(mainTextArea.Document.ContentStart, mainTextArea.Document.ContentEnd);
                 range.Save(fStream, DataFormats.Rtf);
                 fStream.Close();
             }
@@ -71,7 +71,7 @@ namespace Bordushko.HumbleWriter
         {
             if (fontFamilyComboBox.SelectedItem != null)
             {
-                mainRichTextBox.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, fontFamilyComboBox.Text);
+                mainTextArea.Selection.ApplyPropertyValue(Inline.FontFamilyProperty, fontFamilyComboBox.SelectedItem);
             }
         }
 
@@ -79,14 +79,28 @@ namespace Bordushko.HumbleWriter
         {
             if (fontSizeComboBox.SelectedItem != null)
             {
-                mainRichTextBox.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
+                mainTextArea.Selection.ApplyPropertyValue(Inline.FontSizeProperty, fontSizeComboBox.Text);
             }
         }
 
-        private void mainRichTextBox_SelectionChanged(object sender, RoutedEventArgs e)
+        private void mainTextArea_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            //object temp = mainRichTextBox.Selection.ApplyPropertyValue(Inline.FontWeightProperty);
-            
+            object temp = mainTextArea.Selection.GetPropertyValue(Inline.FontWeightProperty);
+            boldToggleBtn.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontWeights.Bold));
+            temp = mainTextArea.Selection.GetPropertyValue(Inline.FontStyleProperty);
+            italicToggleBtn.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(FontStyles.Italic));
+            temp = mainTextArea.Selection.GetPropertyValue(Inline.TextDecorationsProperty);
+            underlineToggleBtn.IsChecked = (temp != DependencyProperty.UnsetValue) && (temp.Equals(TextDecorations.Underline));
+
+            temp = mainTextArea.Selection.GetPropertyValue(Inline.FontFamilyProperty);
+            fontFamilyComboBox.SelectedItem = temp;
+            temp = mainTextArea.Selection.GetPropertyValue(Inline.FontSizeProperty);
+            fontSizeComboBox.Text = temp.ToString();  
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bordushko.TextControls">
+      <HintPath>..\..\..\..\ППвИС\Term 2\Bordushko.TextControls\Bordushko.TextControls\bin\Debug\Bordushko.TextControls.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

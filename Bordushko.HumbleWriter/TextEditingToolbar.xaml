@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Bordushko.HumbleWriter.HumbleWriter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Height="29" Width="283">
+    <UserControl.Resources>
+        <Style TargetType="ToggleButton" x:Key="myButtonStyle">
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+    </UserControl.Resources>
+    <ToolBarTray Margin="0,0,-12,0">
+        <ToolBar Name="TextEditingToolBar" DockPanel.Dock="Left">
+            <ComboBox Name="fontFamilyComboBox" Width="150" ToolTip="Font family"></ComboBox>
+            <ComboBox Name="fontSizeComboBox" Width="40" ToolTip="Font size"></ComboBox>
+            <ToggleButton Name="boldToggleBtn" Width="22" Height="22" Margin="2 2 1 0" Style="{StaticResource myButtonStyle}"
+                            Command="EditingCommands.ToggleBold">
+                <Image Source="Content/Icons/Formatting (Bold) - Blue_24x24.png"></Image>
+            </ToggleButton>
+            <ToggleButton Name="italicToggleBtn" Width="22" Height="22" Margin="1 2 1 0" Style="{StaticResource myButtonStyle}"
+                            Command="EditingCommands.ToggleItalic">
+                <Image Source="Content/Icons/Formatting (Italic) - Red_24x24.png"></Image>
+            </ToggleButton>
+            <ToggleButton Name="underlineToggleBtn" Width="22" Height="22" Margin="1 2 2 0" Style="{StaticResource myButtonStyle}"
+                            Command="EditingCommands.ToggleUnderline">
+                <Image Source="Content/Icons/Formatting (Underline) - Blue_24x24.png"></Image>
+            </ToggleButton>
+        </ToolBar>
+    </ToolBarTray>
+</UserControl>
